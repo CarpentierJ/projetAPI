@@ -6,8 +6,8 @@ button.addEventListener('click', function () {
 });
 
 
-function appelApi(nom, mdp) {
-    const data = { Login: nom, Password: mdp };
+function appelApi(Login, Password) {
+    const data = { Login: pseudo, Password: mdp };
 
     const url = `http://192.168.65.242:4005/addUser`;
 
@@ -27,7 +27,7 @@ function appelApi(nom, mdp) {
         .then(responseData => {
             if (responseData.success) {
                 console.log('Réponse de l\'API :', responseData);
-                var tableau = document.getElementById("Labels");
+                var tableau = document.getElementById("User");
                 var nouvelleLigne = tableau.insertRow();
                 nouvelleLigne.insertCell(0).innerHTML = responseData.Login;
                 nouvelleLigne.insertCell(1).innerHTML = responseData.Password;
@@ -53,12 +53,12 @@ fetch(apiUrl)
     .then(data => {
         let div = document.getElementById("toto");
         var table = document.createElement("table");
-        table.id = "Labels";
+        table.id = "User";
         for (var i = 0; i < data.length; i++) {
             var row = table.insertRow(i + 0);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
-            cell1.innerHTML = data[i].login;
+            cell1.innerHTML = data[i].pseudo;
             cell2.innerHTML = data[i].mdp;
         }
         div.appendChild(table);
