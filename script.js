@@ -27,7 +27,7 @@ function appelApi(Login, Password) {
         .then(responseData => {
             if (responseData.success) {
                 console.log('Réponse de l\'API :', responseData);
-                var tableau = document.getElementById("User");
+                var tableau = document.getElementById("container");
                 var nouvelleLigne = tableau.insertRow();
                 nouvelleLigne.insertCell(0).innerHTML = responseData.Login;
                 nouvelleLigne.insertCell(1).innerHTML = responseData.Password;
