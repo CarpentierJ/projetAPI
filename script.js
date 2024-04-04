@@ -51,7 +51,6 @@ fetch(apiUrl)
         return response.json();
     })
     .then(data => {
-        let div = document.getElementById("toto");
         var table = document.createElement("table");
         table.id = "User";
         for (var i = 0; i < data.length; i++) {
