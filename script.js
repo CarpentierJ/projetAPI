@@ -9,9 +9,7 @@ button.addEventListener('click', function () {
 function appelApi(Login, Password) {
     const data = { Login: pseudo, Password: mdp };
 
-    const url = `http://192.168.65.242:4005/addUser`;
-
-    fetch(url, {
+    fetch('http://192.168.65.242/projetAPI', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
