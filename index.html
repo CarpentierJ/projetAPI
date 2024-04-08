@@ -13,14 +13,14 @@
         <br>
         <h1>Password</h1>
         <input type="password" id="PasswordInput" placeholder="Entrez votre mot de passe">
-        <button id="togglePasswordBtn">Afficher/Masquer</button>
+        <button id="ShowHideBtn">Afficher/Masquer</button>
         <br>
         <button id="inscriptionButton">Inscription</button>
         <button id="connexionButton">Connexion</button>
     </div>
     
     <script>
-        document.getElementById('togglePasswordBtn').addEventListener('click', () => {
+        document.getElementById('ShowHideBtn').addEventListener('click', () => {
             const passwordInput = document.getElementById('PasswordInput');
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
