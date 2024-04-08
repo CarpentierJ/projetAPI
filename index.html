@@ -13,13 +13,14 @@
         <br>
         <h1>Password</h1>
         <input type="password" id="PasswordInput" placeholder="Entrez votre mot de passe">
-        <button id="ShowHidebtn">Afficher/Masquer</button>
+        <button id="togglePasswordBtn">Afficher/Masquer</button>
         <br>
-        <button id="submitButton">Envoyer</button>
+        <button id="inscriptionButton">Inscription</button>
+        <button id="connexionButton">Connexion</button>
     </div>
     
     <script>
-        document.getElementById('ShowHidebtn').addEventListener('click', () => {
+        document.getElementById('togglePasswordBtn').addEventListener('click', () => {
             const passwordInput = document.getElementById('PasswordInput');
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -28,7 +29,7 @@
             }
         });
 
-        document.getElementById('submitButton').addEventListener('click', async () => {
+        document.getElementById('inscriptionButton').addEventListener('click', async () => {
             const Login = document.getElementById('LoginInput').value;
             const Password = document.getElementById('PasswordInput').value;
 
@@ -43,7 +44,7 @@
             };
 
             try {
-                const response = await fetch('http://192.168.65.242:4005/addUser', {
+                const response = await fetch('http://localhost:4005/inscription', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -71,6 +72,54 @@
             } catch (error) {
                 console.error('Erreur lors de la requête fetch :', error);
                 alert('Erreur lors de l\'ajout de l\'utilisateur.');
+            }
+        });
+
+        document.getElementById('connexionButton').addEventListener('click', async () => {
+            const Login = document.getElementById('LoginInput').value;
+            const Password = document.getElementById('PasswordInput').value;
+
+            if (!Login || !Password) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+
+            const formData = {
+                Login,
+                Password
+            };
+
+            try {
+                const response = await fetch('http://localhost:4005/connexion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    const errorMessage = await response.json();
+                    if (errorMessage && errorMessage.message) {
+                        alert(errorMessage.message);
+                    } else {
+                        throw new Error('Erreur lors de la requête HTTP : ' + response.status);
+                    }
+                    return;
+                }
+
+                const data = await response.json();
+                if (data.success) {
+                    // Connexion réussie, rediriger vers une autre page
+                    alert('Connexion réussie ! Redirection vers une autre page...');
+                    window.location.href = '/page-secure'; // Remplacez par l'URL de la page sécurisée
+                } else {
+                    alert('Login ou mot de passe incorrect.');
+                }
+
+            } catch (error) {
+                console.error('Erreur lors de la requête fetch :', error);
+                alert('Erreur lors de la connexion.');
             }
         });
     </script>
