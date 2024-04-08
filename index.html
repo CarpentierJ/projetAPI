@@ -13,13 +13,13 @@
         <br>
         <h1>Password</h1>
         <input type="password" id="PasswordInput" placeholder="Entrez votre mot de passe">
-        <button id="togglePasswordBtn">Afficher/Masquer</button>
+        <button id="showhide">Afficher/Masquer</button>
         <br>
         <button id="submitButton">Envoyer</button>
     </div>
     
     <script>
-        document.getElementById('togglePasswordBtn').addEventListener('click', () => {
+        document.getElementById('showhide').addEventListener('click', () => {
             const passwordInput = document.getElementById('PasswordInput');
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -43,7 +43,7 @@
             };
 
             try {
-                const response = await fetch('http://localhost:4005/addUser', {
+                const response = await fetch('http://192.168.65.242:4005/addUser', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
