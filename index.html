@@ -13,13 +13,13 @@
         <br>
         <h1>Password</h1>
         <input type="password" id="PasswordInput" placeholder="Entrez votre mot de passe">
-        <button id="showhide">Afficher/Masquer</button>
+        <button id="togglePasswordBtn">Afficher/Masquer</button>
         <br>
         <button id="submitButton">Envoyer</button>
     </div>
     
     <script>
-        document.getElementById('showhide').addEventListener('click', () => {
+        document.getElementById('togglePasswordBtn').addEventListener('click', () => {
             const passwordInput = document.getElementById('PasswordInput');
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -43,7 +43,7 @@
             };
 
             try {
-                const response = await fetch('http://192.168.65.242:4005/addUser', {
+                const response = await fetch('http://localhost:4005/addUser', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -52,12 +52,21 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error('Erreur lors de la requête HTTP : ' + response.status);
+                    const errorMessage = await response.json();
+                    if (errorMessage && errorMessage.message) {
+                        alert(errorMessage.message);
+                    } else {
+                        throw new Error('Erreur lors de la requête HTTP : ' + response.status);
+                    }
+                    return;
                 }
 
                 const data = await response.json();
-                console.log('Réponse du serveur :', data);
-                alert('Utilisateur ajouté avec succès !');
+                if (data.success) {
+                    alert('Utilisateur ajouté avec succès !');
+                } else {
+                    alert('Erreur lors de l\'ajout de l\'utilisateur.');
+                }
 
             } catch (error) {
                 console.error('Erreur lors de la requête fetch :', error);
