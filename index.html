@@ -2,46 +2,32 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Client</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscription / Connexion</title>
 </head>
 <body>
     <div class="container">
-        <h1>Login</h1>
-        <input type="text" id="LoginInput" placeholder="Entrez votre pseudo">
-        <br>
-        <h1>Password</h1>
-        <input type="password" id="PasswordInput" placeholder="Entrez votre mot de passe">
-        <button id="ShowHideBtn">Afficher/Masquer</button>
-        <br>
-        <button id="inscriptionButton">Inscription</button>
-        <button id="connexionButton">Connexion</button>
+        <h1>Inscription</h1>
+        <input type="text" id="pseudoInscription" placeholder="Entrez votre pseudo">
+        <input type="password" id="mdpInscription" placeholder="Entrez votre mot de passe">
+        <button onclick="inscription()">S'inscrire</button>
+        <hr>
+        <h1>Connexion</h1>
+        <input type="text" id="pseudoConnexion" placeholder="Entrez votre pseudo">
+        <input type="password" id="mdpConnexion" placeholder="Entrez votre mot de passe">
+        <button onclick="connexion()">Se connecter</button>
     </div>
-    
+
     <script>
-        document.getElementById('ShowHideBtn').addEventListener('click', () => {
-            const passwordInput = document.getElementById('PasswordInput');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-            } else {
-                passwordInput.type = 'password';
-            }
-        });
+        async function inscription() {
+            const pseudo = document.getElementById('pseudoInscription').value;
+            const mdp = document.getElementById('mdpInscription').value;
 
-        document.getElementById('inscriptionButton').addEventListener('click', async () => {
-            const Login = document.getElementById('LoginInput').value;
-            const Password = document.getElementById('PasswordInput').value;
-
-            if (!Login || !Password) {
+            if (!pseudo || !mdp) {
                 alert('Veuillez remplir tous les champs');
                 return;
             }
 
-            const formData = {
-                pseudo: Login,
-                mdp: Password
-            };
+            const formData = { pseudo, mdp };
 
             try {
                 const response = await fetch('http://192.168.65.242:4005/inscription', {
@@ -54,29 +40,26 @@
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert('Utilisateur ajouté avec succès !');
+                    alert('Inscription réussie !');
                 } else {
-                    alert(data.message || 'Erreur lors de l\'ajout de l\'utilisateur.');
+                    alert(data.message || 'Erreur lors de l\'inscription');
                 }
             } catch (error) {
                 console.error('Erreur lors de la requête fetch :', error);
-                alert('Erreur lors de l\'ajout de l\'utilisateur.');
+                alert('Erreur lors de l\'inscription');
             }
-        });
+        }
 
-        document.getElementById('connexionButton').addEventListener('click', async () => {
-            const Login = document.getElementById('LoginInput').value;
-            const Password = document.getElementById('PasswordInput').value;
+        async function connexion() {
+            const pseudo = document.getElementById('pseudoConnexion').value;
+            const mdp = document.getElementById('mdpConnexion').value;
 
-            if (!Login || !Password) {
+            if (!pseudo || !mdp) {
                 alert('Veuillez remplir tous les champs');
                 return;
             }
 
-            const formData = {
-                pseudo: Login,
-                mdp: Password
-            };
+            const formData = { pseudo, mdp };
 
             try {
                 const response = await fetch('http://192.168.65.242:4005/connexion', {
@@ -89,16 +72,16 @@
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert('Connexion réussie ! Redirection vers la page principale');
-                    window.location.href = '/page-secure'; // Remplacez par l'URL de la page sécurisée
+                    alert('Connexion réussie ! Redirection vers la page sécurisée');
+                    window.location.href = '/page-secure'; // Redirection vers la page sécurisée
                 } else {
-                    alert(data.message || 'Login ou mot de passe incorrect.');
+                    alert(data.message || 'Erreur lors de la connexion');
                 }
             } catch (error) {
                 console.error('Erreur lors de la requête fetch :', error);
-                alert('Erreur lors de la connexion.');
+                alert('Erreur lors de la connexion');
             }
-        });
+        }
     </script>
 </body>
 </html>
