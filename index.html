@@ -9,11 +9,13 @@
         <h1>Inscription</h1>
         <input type="text" id="pseudoInscription" placeholder="Entrez votre pseudo">
         <input type="password" id="mdpInscription" placeholder="Entrez votre mot de passe">
+        <button onclick="togglePassword('mdpInscription')">Afficher/Masquer</button>
         <button onclick="inscription()">S'inscrire</button>
         <hr>
         <h1>Connexion</h1>
         <input type="text" id="pseudoConnexion" placeholder="Entrez votre pseudo">
         <input type="password" id="mdpConnexion" placeholder="Entrez votre mot de passe">
+        <button onclick="togglePassword('mdpConnexion')">Afficher/Masquer</button>
         <button onclick="connexion()">Se connecter</button>
     </div>
 
@@ -80,6 +82,15 @@
             } catch (error) {
                 console.error('Erreur lors de la requête fetch :', error);
                 alert('Erreur lors de la connexion');
+            }
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
             }
         }
     </script>
