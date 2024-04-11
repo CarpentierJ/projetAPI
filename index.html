@@ -21,35 +21,8 @@
 
     <script>
         async function inscription() {
-            const pseudo = document.getElementById('pseudoInscription').value;
-            const mdp = document.getElementById('mdpInscription').value;
-
-            if (!pseudo || !mdp) {
-                alert('Veuillez remplir tous les champs');
-                return;
-            }
-
-            const formData = { pseudo, mdp };
-
-            try {
-                const response = await fetch('http://192.168.65.242:4005/inscription', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                const data = await response.json();
-                if (response.ok) {
-                    alert('Inscription réussie ! Vous pouvez maintenant vous connecter.');
-                } else {
-                    alert(data.message || 'Erreur lors de l\'inscription');
-                }
-            } catch (error) {
-                console.error('Erreur lors de la requête fetch :', error);
-                alert('Erreur lors de l\'inscription');
-            }
+            // Code pour l'inscription
+            // ...
         }
 
         async function connexion() {
@@ -75,7 +48,7 @@
                 const data = await response.json();
                 if (response.ok) {
                     alert('Connexion réussie ! Redirection en cours...');
-                    window.location.href = 'page-secure.html'; // Redirection vers la page sécurisée
+                    window.location.href = '/page-secure'; // Redirection vers la page sécurisée
                 } else {
                     alert(data.message || 'Erreur lors de la connexion');
                 }
