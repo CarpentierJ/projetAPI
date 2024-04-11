@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Client</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <div class="container">
@@ -39,8 +39,8 @@
             }
 
             const formData = {
-                Login,
-                Password
+                pseudo: Login,
+                mdp: Password
             };
 
             try {
@@ -52,23 +52,12 @@
                     body: JSON.stringify(formData)
                 });
 
-                if (!response.ok) {
-                    const errorMessage = await response.json();
-                    if (errorMessage && errorMessage.message) {
-                        alert(errorMessage.message);
-                    } else {
-                        throw new Error('Erreur lors de la requête HTTP : ' + response.status);
-                    }
-                    return;
-                }
-
                 const data = await response.json();
-                if (data.success) {
+                if (response.ok) {
                     alert('Utilisateur ajouté avec succès !');
                 } else {
-                    alert('Erreur lors de l\'ajout de l\'utilisateur.');
+                    alert(data.message || 'Erreur lors de l\'ajout de l\'utilisateur.');
                 }
-
             } catch (error) {
                 console.error('Erreur lors de la requête fetch :', error);
                 alert('Erreur lors de l\'ajout de l\'utilisateur.');
@@ -85,8 +74,8 @@
             }
 
             const formData = {
-                Login,
-                Password
+                pseudo: Login,
+                mdp: Password
             };
 
             try {
@@ -98,25 +87,13 @@
                     body: JSON.stringify(formData)
                 });
 
-                if (!response.ok) {
-                    const errorMessage = await response.json();
-                    if (errorMessage && errorMessage.message) {
-                        alert(errorMessage.message);
-                    } else {
-                        throw new Error('Erreur lors de la requête HTTP : ' + response.status);
-                    }
-                    return;
-                }
-
                 const data = await response.json();
-                if (data.success) {
-                    // Connexion réussie, rediriger vers une autre page
+                if (response.ok) {
                     alert('Connexion réussie ! Redirection vers la page principale');
                     window.location.href = '/page-secure'; // Remplacez par l'URL de la page sécurisée
                 } else {
-                    alert('Login ou mot de passe incorrect.');
+                    alert(data.message || 'Login ou mot de passe incorrect.');
                 }
-
             } catch (error) {
                 console.error('Erreur lors de la requête fetch :', error);
                 alert('Erreur lors de la connexion.');
