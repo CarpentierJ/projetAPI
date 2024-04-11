@@ -42,8 +42,7 @@
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert('Inscription réussie ! Redirection en cours...');
-                    window.location.href = '/page-secure'; // Redirection vers la page sécurisée
+                    alert('Inscription réussie ! Vous pouvez maintenant vous connecter.');
                 } else {
                     alert(data.message || 'Erreur lors de l\'inscription');
                 }
@@ -76,7 +75,7 @@
                 const data = await response.json();
                 if (response.ok) {
                     alert('Connexion réussie ! Redirection en cours...');
-                    window.location.href = 'page-secure.html'; // Redirection vers la page sécurisée
+                    window.location.href = '/page-secure.html'; // Redirection vers la page sécurisée
                 } else {
                     alert(data.message || 'Erreur lors de la connexion');
                 }
