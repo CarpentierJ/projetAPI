@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Page Sécurisée</title>
+</head>
+<body>
+    <h1>Bienvenue sur la page sécurisée !</h1>
+    <p>Cette page est accessible uniquement après une connexion réussie.</p>
+    <button onclick="logout()">Déconnexion</button>
+
+    <script>
+        function logout() {
+            // Code pour déconnecter l'utilisateur (effacer les cookies, vider la session, etc.)
+            alert('Déconnexion réussie ! Redirection vers la page d\'accueil...');
+            window.location.href = '/'; // Rediriger vers la page d'accueil après déconnexion
+        }
+    </script>
+</body>
+</html>
